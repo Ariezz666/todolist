@@ -12,7 +12,95 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.2/trianglify.min.js"></script>
 
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" /> -->
+    <style type="text/css">
+        DIV.main_block {
+
+    margin: 0px;
+
+    background-color: #F9F9F9;
+
+    border: 1px #000000 dashed;
+
+    padding: 0px;
+
+    color: #797979;
+
+}
+
+DIV.toggle {
+
+    padding: 5px;
+
+    cursor: pointer;
+
+}
+
+div.this_block_is_hidden {
+
+    background-color: #FFFFFF;
+
+
+
+    padding: 5px;
+
+    color: #000000;
+
+    display: none;
+
+}
+
+input.editbox {
+
+
+
+            display: none;
+
+        }
+
+
+
+li.active {
+    list-style-image: url('https://photos-4.dropbox.com/t/2/AADjPTaO_FaGiD69Kr8ZioFZXMWB2fD5AYw1tf7uPppsTw/12/85093114/jpeg/32x32/1/_/1/2/active.jpg/EI-pn0IYKiACKAI/uM8OunnDL7rsJupg2XzeSRdvqMTOqm6foszx7Q_Edmo?size=2048x1536&size_mode=3');
+    /*background-color: #F9F9F9;*/
+
+
+}
+
+li.done {
+    list-style-image: url('https://photos-1.dropbox.com/t/2/AAC1gwaBLs1C8KschTewXJEej3SD5fMvaGrEx2ieq4O-PQ/12/85093114/jpeg/32x32/1/_/1/2/completed.jpg/EI-pn0IYKiACKAI/YID70-kjFKhmaB6zPPE31woF28MEUrOaTbI1XwyhMoU?size=2048x1536&size_mode=3');
+    color: green;
+    /*background-color: chartreuse;*/
+
+    /*text-decoration: line-through;*/
+
+}
+
+
+.comment{
+    background:rgba(255,255,255,1);
+    padding: 8px;
+    margin-bottom:5px;
+    border:none;
+}
+.white{
+    background:rgba(255,255,255,1);
+    padding-top: 10px;
+    border:none;
+}
+.commentcenter{
+    position:relative;
+    left:43%;
+}
+input.textarea:focus{
+    height:1.5em;
+    resize:none;
+}
+textarea{
+    height:1.5em;
+    resize:none;
+}
+    </style>
 
     {% block head %}
     {% endblock %}

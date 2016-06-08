@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block content %}
+    <br><br>
+    <div class="row white">
+        <div class="large-12 columns">
+            <h2>To-do list</h2>
+            {% if all_finished_job%}
+                <div id="all-finished">
+                    <h3 id="h-all-finished">You has been finished  {{ all_finished_job }} jobs already</h3>
+                </div>
+            {% endif %}
+
+
+            <select name="" id="status">
+                <option value="">All item</option>
+                <option value="active">Active</option>
+                <option value="done">Completed</option>
+
+            </select>
+
+
+        </div>
+    </div>
+
+    <hr>
+
+
+    <!-- The feed -->
+    <div class="row white">
+        <div class="columns large-12">
+            <div id="jobs">
+                <section>
+                    {% for job in jobs %}
+                        <ul>
+                            {% if job.is_finished  %}
+                                <li class = "done" id = "job-{{ job.id }}" status-job="s-done">
+                                    <div onclick="openBlock(this);" id = "job-title-{{ job.id }}">
+                                        <strong >{{ job.title }}</strong>
+                                    </div>
+                                    <form method="POST" id="job-edit-{{ job.id }}" class="edit-title-form">
+                                        {% csrf_token %}
+                                        <div>
+                                            <input type="text" value="{{ job.title }}" class="editbox" id="title-input-{{ job.id }}">
+                                        </div>
+                                        {% csrf_token %}
+                                    </form>
+                                    <div class="this_block_is_hidden">
+                                        <a  id="delete-job-{{job.id}}" class="delete">delete</a>
+                                        <a id="edit-job-{{job.id}}" class="edit">edit</a>
+                                        <a id="done-job-{{job.id}}" class="finished">change</a>
+                                    </div>
+                                    <hr>
+                                </li>
+                            {% else %}
+                                <li class = "active" id = "job-{{ job.id }}" status-job="s-active">
+                                    <div onclick="openBlock(this);" id = "job-title-{{ job.id }}">
+                                        <strong>{{ job.title }}</strong>
+                                    </div>
+                                    <form method="POST" id="job-edit-{{ job.id }}" class="edit-title-form">
+                                        {% csrf_token %}
+                                        <div>
+                                            <input type="text" value="{{ job.title }}" class="editbox" id="title-input-{{ job.id }}">
+                                        </div>
+                                        {% csrf_token %}
+                                    </form>
+                                    <div class="this_block_is_hidden">
+                                        <a  id="delete-job-{{job.id}}" class="delete">delete</a>
+                                        <a id="edit-job-{{job.id}}" class="edit">edit</a>
+                                        <a id="done-job-{{job.id}}" class="finished">change</a>
+                                    </div>
+                                    <hr>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endfor %}
+                </section>
+            </div>
+        </div>
+        <div id="active_jobs"><p id = "item_left">Items left : {{active}}</p></div>
+
+        {% if done %}
+            <div id="job-delete-complete">
+                <a  id="all_completed" class="delete-completed" >Delete completed : {{done}}</a>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <p class="row white"><strong>Add new job</strong></p>
+    <div class="row white">
+        <div class="columns large-12">
+            <form method="POST" id="job-form">
+                {% csrf_token %}
+                <input type="text"  id="job_title">
+                <input type="submit" value="Add new job" >
+
+                {% csrf_token %}
+            </form>
+
+        </div>
+    </div>
+
+
+
+    <script type='text/javascript'>
+        $(function(){
+            $('select').change(function(){
+                $('section li').show();
+                $('select').each(function(){
+                    var val=this.value
+                    if (val!='') {
+                        val=this.id.valueOf()[0]+'-'+val;
+                        $('section li:not([status-job*="'+val+'"])').hide();
+                    };
+                });
+            });
+        });
+
+        function openBlock(el) {
+
+            var kids = el.parentNode.childNodes;
+
+            for (var k = 0; k < kids.length; k++) {
+
+                var child = kids[k];
+
+                if (child && child.className == "this_block_is_hidden") {
+
+                    if (child.style.display != 'block') {
+
+                        child.style.display = 'block';
+
+                    } else {
+
+                        child.style.display = 'none';
+
+                    }
+
+                }
+
+            }
+        }
+        {#         function closeBlock(el) {#}
+        {##}
+        {##}
+        {##}
+        {#                     var kids = el.parentNode.childNodes;#}
+        {##}
+        {##}
+        {##}
+        {#                     for (var k = 0; k < kids.length; k++) {#}
+        {##}
+        {#                         var child = kids[k];#}
+        {##}
+        {##}
+        {#                         if (child && child.className == "this_block_is_hidden") {#}
+        {##}
+        {#                             if (child.style.display == 'block') {#}
+        {##}
+        {#                                 child.style.display = 'none';#}
+        {##}
+        {#                             } else {#}
+        {##}
+        {#                                 child.style.display = 'none';#}
+        {##}
+        {#                             }#}
+        {##}
+        {#                         }#}
+        {##}
+        {#                     }#}
+        {##}
+        {#                 }#}
+        {##}
+        {#         function sleep(millis) {#}
+        {#             var t = (new Date()).getTime();#}
+        {#             var i = 0;#}
+        {#             while (((new Date()).getTime() - t) < millis) {#}
+        {#                 i++;#}
+        {#             }#}
+        {#         }#}
+    </script>
+
+    {% load staticfiles %}
+    <script src="static/scripts/main.js"></script>
+
+
+
+
+{% endblock %}

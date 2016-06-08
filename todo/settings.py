@@ -138,16 +138,16 @@ STATICFILES_DIRS = (
 )
 
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config()
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
-DEBUG = True
+# DEBUG = True
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass

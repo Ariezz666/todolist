@@ -52,7 +52,7 @@ class TaskView(View):
             response_data = {}
 
             response_data['result'] = 'Create post successful!'
-            response_data['postpk'] = job.pk
+            response_data['pk'] = job.pk
             response_data['title'] = job.title
             response_data['active'] = len(TodoList.objects.filter(is_finished=False))
 

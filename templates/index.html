@@ -6,9 +6,9 @@
             <h2>To-do list</h2>
             {% if all_finished_job%}
                 <div id="all-finished">
-                <hr>
+                    <hr>
                     <h3 id="h-all-finished">You has been finished  {{ all_finished_job }} tasks already</h3>
-                <hr>
+                    <hr>
                 </div>
             {% endif %}
 
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    
+
 
 
     <!-- The feed -->
@@ -34,8 +34,9 @@
             <div id="jobs">
                 <section>
                     {% for job in jobs %}
-                        <ul>
                         {% csrf_token %}
+                        <ul>
+
                             {% if job.is_finished  %}
                                 <li class = "done" id = "job-{{ job.id }}" status-job="s-done">
                                     <div onclick="openBlock(this);" id = "job-title-{{ job.id }}">
@@ -55,18 +56,18 @@
                                     </div>
                                     <hr>
                                 </li>
-                                {% csrf_token %}
+
                             {% else %}
                                 <li class = "active" id = "job-{{ job.id }}" status-job="s-active">
                                     <div onclick="openBlock(this);" id = "job-title-{{ job.id }}">
                                         <strong>{{ job.title }}</strong>
                                     </div>
                                     <form method="POST" id="job-edit-{{ job.id }}" class="edit-title-form">
-                                        {% csrf_token %}
+
                                         <div>
                                             <input type="text" value="{{ job.title }}" class="editbox" id="title-input-{{ job.id }}">
                                         </div>
-                                        {% csrf_token %}
+
                                     </form>
                                     <div class="this_block_is_hidden">
                                         <a  id="delete-job-{{job.id}}" class="delete">delete</a>
@@ -77,6 +78,7 @@
                                 </li>
                             {% endif %}
                         </ul>
+                        {% csrf_token %}
                     {% endfor %}
                 </section>
             </div>
@@ -88,7 +90,7 @@
                 <a  id="all_completed" class="delete-completed" >Delete completed : {{done}}</a>
             </div>
         {% endif %}
-    <hr>
+        <hr>
 
     </div>
 

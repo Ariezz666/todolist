@@ -90,7 +90,7 @@ $(function() {
             success : function(json) {
                 $('#job_title').val(''); // remove the value from the input
                 console.log(json); // log the returned json to the console
-                $("#jobs").prepend("<li class = 'active' id = 'job-"+json.pk+"' status-job='s-active'><div onclick='openBlock(this);'><strong>"+json.title+"</strong></div><div class='this_block_is_hidden'><a  id='delete-job-"+json.pk+"' class='delete'>delete  </a><a id='edite-job-"+json.pk+"' class='edit'>  edit  </a><a  id='delete-job-"+json.pk+"' class='finished'>  change </a></div><hr>");
+                $("#jobs").prepend('<li class = "active" id = "job-'+json.pk+'" status-job="s-active"><div onclick="openBlock(this);" id = "job-title-'+json.pk+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+json.pk+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+json.pk+'"></div></form><div class="this_block_is_hidden"><a  id="delete-job-'+json.pk+'" class="delete"> delete </a><a id="edit-job-'+json.pk+'" class="edit" >edit </a><a id="done-job-'+json.pk+'" class="finished"> change </a></div><hr></li>');
                 $("#item_left").hide();
                 $("#active_jobs").prepend(" <p id = 'item_left'>Items left : " + json.active+"</p>");
 

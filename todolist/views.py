@@ -145,7 +145,8 @@ class TaskView(View):
             # # if task title does not exist make this task finished/unfinished
             else:
 
-                job = TodoList.objects.get(id=QueryDict(request.body).get('job_done_pk'))
+                id = QueryDict(request.body).get('job_done_pk')
+                job = TodoList.objects.get(id=id)
 
                 # if task is finished change in to unfinished
                 if job.is_finished:
@@ -181,6 +182,7 @@ class TaskView(View):
                 response_data['done'] = len(TodoList.objects.filter(is_finished=True))
                 response_data['isdone'] = job.is_finished
                 response_data['allFinishedJobs'] = all_finished_jobs
+                response_data['title'] = job.title
 
                 return HttpResponse(
                     json.dumps(response_data),

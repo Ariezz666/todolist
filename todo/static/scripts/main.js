@@ -160,9 +160,9 @@ $(function() {
                 $("#active_jobs").prepend(" <p id = 'item_left'>Items left : " + json.active+"</p>");
 
                 if (json.isdone)
-                    document.getElementById("job-"+job_done_key).className = 'done';
+                    $("#job-"+job_done_key).replaceWith('<li class = "done" id = "job-'+job_done_key+'" status-job="s-done"><div onclick="openBlock(this);" id = "job-title-'+job_done_key+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+job_done_key+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+job_done_key+'"></div></form><div class="this_block_is_hidden"><a  id="delete-job-'+job_done_key+'" class="delete"> delete </a><a id="edit-job-'+job_done_key+'" class="edit"> edit </a><a id="done-job-'+job_done_key+'" class="finished"> change </a></div><hr></li>');
                 else
-                    document.getElementById("job-"+job_done_key).className = 'active';
+                    $("#job-"+job_done_key).replaceWith('<li class = "active" id = "job-'+job_done_key+'" status-job="s-active"><div onclick="openBlock(this);" id = "job-title-'+job_done_key+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+job_done_key+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+job_done_key+'"></div></form><div class="this_block_is_hidden"><a  id="delete-job-'+job_done_key+'" class="delete"> delete </a><a id="edit-job-'+job_done_key+'" class="edit" >edit </a><a id="done-job-'+job_done_key+'" class="finished"> change </a></div><hr></li>');
 
                 console.log(json);
                 console.log("job finished successful");

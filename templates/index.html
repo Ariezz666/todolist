@@ -35,17 +35,18 @@
                 <section>
                     {% for job in jobs %}
                         <ul>
+                        {% csrf_token %}
                             {% if job.is_finished  %}
                                 <li class = "done" id = "job-{{ job.id }}" status-job="s-done">
                                     <div onclick="openBlock(this);" id = "job-title-{{ job.id }}">
                                         <strong >{{ job.title }}</strong>
                                     </div>
                                     <form method="POST" id="job-edit-{{ job.id }}" class="edit-title-form">
-                                        {% csrf_token %}
+
                                         <div>
                                             <input type="text" value="{{ job.title }}" class="editbox" id="title-input-{{ job.id }}">
                                         </div>
-                                        {% csrf_token %}
+
                                     </form>
                                     <div class="this_block_is_hidden">
                                         <a  id="delete-job-{{job.id}}" class="delete">delete</a>
@@ -54,6 +55,7 @@
                                     </div>
                                     <hr>
                                 </li>
+                                {% csrf_token %}
                             {% else %}
                                 <li class = "active" id = "job-{{ job.id }}" status-job="s-active">
                                     <div onclick="openBlock(this);" id = "job-title-{{ job.id }}">

@@ -6,15 +6,17 @@
             <h2>To-do list</h2>
             {% if all_finished_job%}
                 <div id="all-finished">
-                    <h3 id="h-all-finished">You has been finished  {{ all_finished_job }} jobs already</h3>
+                <hr>
+                    <h3 id="h-all-finished">You has been finished  {{ all_finished_job }} tasksr.net already</h3>
+                <hr>
                 </div>
             {% endif %}
 
 
             <select name="" id="status">
-                <option value="">All item</option>
-                <option value="active">Active</option>
-                <option value="done">Completed</option>
+                <option value="">All tasks</option>
+                <option value="active">Active tasks</option>
+                <option value="done">Completed tasks</option>
 
             </select>
             <hr>
@@ -77,23 +79,24 @@
                 </section>
             </div>
         </div>
-        <div id="active_jobs"><p id = "item_left">Items left : {{active}}</p></div>
+        <div id="active_jobs"><p id = "item_left">Tsks left : {{active}}</p></div>
 
         {% if done %}
             <div id="job-delete-complete">
                 <a  id="all_completed" class="delete-completed" >Delete completed : {{done}}</a>
             </div>
         {% endif %}
+    <hr>
 
     </div>
 
-    <p class="row white"><strong>Add new job</strong></p>
+    <p class="row white"><strong>Add new task</strong></p>
     <div class="row white">
         <div class="columns large-12">
             <form method="POST" id="job-form">
                 {% csrf_token %}
                 <input type="text"  id="job_title">
-                <input type="submit" value="Add new job" >
+                <input type="submit" value="Add new task" >
 
                 {% csrf_token %}
             </form>

@@ -15,16 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from todolist import views
+from todolist.views import TaskView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home, name='home'),
-    url(r'^create_job/$', views.create_job, name='create_job'),
-    url(r'^delete_job/$', views.delete_job, name='delete_job'),
-    url(r'^done_job/$', views.done_job, name='done_job'),
-    url(r'^delete_completed_job/$', views.delete_completed_job, name='delete_completed_job'),
-    url(r'^edit_job/$', views.edit_job, name='edit_job'),
-
+    url(r'^$', TaskView.as_view(), name='index'),
 
 ]

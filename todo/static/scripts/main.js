@@ -17,7 +17,15 @@ $(function() {
         var job_id =el.attr("id");
         var job_primary_key = job_id.split('-')[2];
         console.log(job_primary_key); // sanity check
-        delete_job(job_primary_key);
+
+        if (confirm('Are you sure you want to remove this jobs?')==true){
+            delete_job(job_primary_key);
+        }
+        else {
+            return false;
+        }
+
+
     });
 
     // Finished job on click
@@ -36,7 +44,13 @@ $(function() {
     $(document).on('click', '.delete-completed', function(e){
         e.preventDefault();
         console.log("Delete all completed form submitted!");
-        delete_completed();
+        if (confirm('Are you sure you want to remove all completed jobs?')==true){
+            delete_completed();
+        }
+        else {
+            return false;
+        }
+
     });
 
     //show form for edit
@@ -70,7 +84,7 @@ $(function() {
         console.log("create job is working!");// sanity check
         $.ajax({
             type : "POST", // http method
-            url : "create_job/", // the endpoint
+            url : "/", // the endpoint
             data : { job_title : $('#job_title').val() }, // data sent with the post request
             // handle a successful response
             success : function(json) {
@@ -95,8 +109,8 @@ $(function() {
     function delete_job(job_primary_key){
         console.log("active job is working!");
         $.ajax({
-            url : "delete_job/", // the endpoint
-            type : "POST", // http method
+            url : "/", // the endpoint
+            type : "DELETE", // http method
             data : { job_pk : job_primary_key }, // data sent with the delete request
             success : function(json) {
                 // hide the post
@@ -126,8 +140,8 @@ $(function() {
     function done_job(job_done_key){
         console.log("done job is working!");
         $.ajax({
-            url : "done_job/", // the endpoint
-            type : "POST", // http method
+            url : "/", // the endpoint
+            type : "PUT", // http method
             data : { job_done_pk : job_done_key }, // data sent with the delete request
             success : function(json) {
                 // hide the post
@@ -168,8 +182,8 @@ $(function() {
     function delete_completed() {
         console.log("delete completed is working!");// sanity check
         $.ajax({
-            type : "POST", // http method
-            url : "delete_completed_job/", // the endpoint
+            type : "DELETE", // http method
+            url : "/", // the endpoint
             data : { confirm : "yes" }, // data sent with the post request
             // handle a successful response
             success : function(json) {
@@ -195,8 +209,8 @@ $(function() {
     function edit_job(key){
         console.log("edit job is working!");
         $.ajax({
-            url : "edit_job/", // the endpoint
-            type : "POST", // http method
+            url : "/", // the endpoint
+            type : "PUT", // http method
             data : { job_edit_pk : key, job_title : $('#title-input-'+key).val() }, // data sent with the delete request
 
             success : function(json) {

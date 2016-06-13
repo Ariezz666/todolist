@@ -90,7 +90,7 @@ $(function() {
             success : function(json) {
                 $('#job_title').val(''); // remove the value from the input
                 console.log(json); // log the returned json to the console
-                $("#jobs").prepend('<li class = "active" id = "job-'+json.pk+'" status-job="s-active"><div onclick="openBlock(this);" id = "job-title-'+json.pk+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+json.pk+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+json.pk+'"></div></form><div class="this_block_is_hidden"><a  id="delete-job-'+json.pk+'" class="delete"> delete </a><a id="edit-job-'+json.pk+'" class="edit" >edit </a><a id="done-job-'+json.pk+'" class="finished"> change </a></div><hr></li>');
+                $("#jobs").prepend('<li class = "active" id = "job-'+json.pk+'" status-job="s-active"><div onclick="openBlock(this);" id = "job-title-'+json.pk+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+json.pk+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+json.pk+'"></div></form><div class="this_block_is_hidden"><input type="button"  id="delete-job-'+json.pk+'" class="delete" value="Delete"> | <input type="button" id="edit-job-'+json.pk+'" class="edit" value="Edit "> | <input type="button" id="done-job-'+json.pk+'" class="finished" value="Complete"></div><hr></li>');
                 $("#item_left").hide();
                 $("#active_jobs").prepend(" <p id = 'item_left'>Items left : " + json.active+"</p>");
 
@@ -114,7 +114,7 @@ $(function() {
             data : { job_pk : job_primary_key }, // data sent with the delete request
             success : function(json) {
                 // hide the post
-                $('#job-'+job_primary_key).hide(); // hide the post on success
+                $('#job-'+job_primary_key).remove(); // hide the post on success
                 $("#item_left").hide();
                 $("#active_jobs").prepend(" <p id = 'item_left'>Items left : " + json.active+"</p>");
 
@@ -153,16 +153,16 @@ $(function() {
                     $("#all_completed").hide();
                 else{
                     $("#all_completed").hide();
-                    $("#job-delete-complete").prepend(" <a  id='all_completed' class='delete-completed' >Delete completed : " +  json.done+"</a>");
+                    $("#job-delete-complete").prepend(" <input type='button'  id='all_completed' class='delete-completed' value='Delete completed : " +  json.done+"'>");
                 }
 
                 $("#item_left").hide();
                 $("#active_jobs").prepend(" <p id = 'item_left'>Items left : " + json.active+"</p>");
 
                 if (json.isdone)
-                    $("#job-"+job_done_key).replaceWith('<li class = "done" id = "job-'+job_done_key+'" status-job="s-done"><div onclick="openBlock(this);" id = "job-title-'+job_done_key+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+job_done_key+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+job_done_key+'"></div></form><div class="this_block_is_hidden"><a  id="delete-job-'+job_done_key+'" class="delete"> delete </a><a id="edit-job-'+job_done_key+'" class="edit"> edit </a><a id="done-job-'+job_done_key+'" class="finished"> change </a></div><hr></li>');
+                    $("#job-"+job_done_key).replaceWith('<li class = "done" id = "job-'+job_done_key+'" status-job="s-done"><div onclick="openBlock(this);" id = "job-title-'+job_done_key+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+job_done_key+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+job_done_key+'"></div></form><div class="this_block_is_hidden"><input type="button" id="delete-job-'+job_done_key+'" class="delete" value="Delete">&nbsp;&nbsp;<input type="button" id="edit-job-'+job_done_key+'" class="edit" value="Edit">&nbsp;&nbsp;<input type="button" id="done-job-'+job_done_key+'" class="finished" value="Cencel"></div><hr></li>');
                 else
-                    $("#job-"+job_done_key).replaceWith('<li class = "active" id = "job-'+job_done_key+'" status-job="s-active"><div onclick="openBlock(this);" id = "job-title-'+job_done_key+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+job_done_key+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+job_done_key+'"></div></form><div class="this_block_is_hidden"><a  id="delete-job-'+job_done_key+'" class="delete"> delete </a><a id="edit-job-'+job_done_key+'" class="edit" >edit </a><a id="done-job-'+job_done_key+'" class="finished"> change </a></div><hr></li>');
+                    $("#job-"+job_done_key).replaceWith('<li class = "active" id = "job-'+job_done_key+'" status-job="s-active"><div onclick="openBlock(this);" id = "job-title-'+job_done_key+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+job_done_key+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+job_done_key+'"></div></form><div class="this_block_is_hidden"><input type="button" id="delete-job-'+job_done_key+'" class="delete" value="Delete">&nbsp;&nbsp;<input type="button" id="edit-job-'+job_done_key+'" class="edit" value="Edit">&nbsp;&nbsp;<input type="button" id="done-job-'+job_done_key+'" class="finished" value="Complete"></div><hr></li>');
 
                 console.log(json);
                 console.log("job finished successful");
@@ -189,7 +189,7 @@ $(function() {
             success : function(json) {
 
                 for (var i = 0; i < json.id.length; i++) {
-                    $("#job-"+json.id[i]).hide();
+                    $("#job-"+json.id[i]).remove();
                 }
                 $("#all_completed").hide();
 

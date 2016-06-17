@@ -84,7 +84,7 @@
                 </section>
             </div>
         </div>
-        <div id="active_jobs"><p id = "item_left">Tsks left : {{active}}</p></div>
+        <div id="active_jobs"><p id = "item_left">Tasks left : {{active}}</p></div>
 
         {% if done %}
             <div id="job-delete-complete">
@@ -120,85 +120,49 @@
 
 
     <script type='text/javascript'>
-        $(function(){
-            $('select').change(function(){
-                $('section li').show();
-                $('select').each(function(){
-                    var val=this.value
-                    if (val!='') {
-                        val=this.id.valueOf()[0]+'-'+val;
-                        $('section li:not([status-job*="'+val+'"])').hide();
-                    };
-                });
-            });
-        });
 
-        function openBlock(el) {
+    //                 function closeBlock(el) {#}
+    //
+    //
+    //
+    //                             var kids = el.parentNode.childNodes;#}
+    //
+    //
+    //
+    //                             for (var k = 0; k < kids.length; k++) {#}
+    //
+    //                                var child = kids[k];#}
+    //
+    //
+    //                                 if (child && child.className == "this_block_is_hidden") {#}
+    //
+    //                                     if (child.style.display == 'block') {#}
+    //
+    //                                         child.style.display = 'none';#}
+    //
+    //                                     } else {#}
+    //
+    //                                         child.style.display = 'none';#}
+    //
+    //                                     }#}
+    //
+    //                                 }#}
+    //
+    //                             }#}
+    //
+    //                         }#}
+    //
+    //                 function sleep(millis) {#}
+    //                     var t = (new Date()).getTime();#}
+    //                     var i = 0;#}
+    //                     while (((new Date()).getTime() - t) < millis) {#}
+    //                         i++;#}
+    //                     }#}
+    //                 }#}
+</script>
 
-            var kids = el.parentNode.childNodes;
-
-            for (var k = 0; k < kids.length; k++) {
-
-                var child = kids[k];
-
-                if (child && child.className == "this_block_is_hidden") {
-
-                    if (child.style.display != 'block') {
-
-                        child.style.display = 'block';
-
-                    } else {
-
-                        child.style.display = 'none';
-
-                    }
-
-                }
-
-            }
-        }
-        {#         function closeBlock(el) {#}
-        {##}
-        {##}
-        {##}
-        {#                     var kids = el.parentNode.childNodes;#}
-        {##}
-        {##}
-        {##}
-        {#                     for (var k = 0; k < kids.length; k++) {#}
-        {##}
-        {#                         var child = kids[k];#}
-        {##}
-        {##}
-        {#                         if (child && child.className == "this_block_is_hidden") {#}
-        {##}
-        {#                             if (child.style.display == 'block') {#}
-        {##}
-        {#                                 child.style.display = 'none';#}
-        {##}
-        {#                             } else {#}
-        {##}
-        {#                                 child.style.display = 'none';#}
-        {##}
-        {#                             }#}
-        {##}
-        {#                         }#}
-        {##}
-        {#                     }#}
-        {##}
-        {#                 }#}
-        {##}
-        {#         function sleep(millis) {#}
-        {#             var t = (new Date()).getTime();#}
-        {#             var i = 0;#}
-        {#             while (((new Date()).getTime() - t) < millis) {#}
-        {#                 i++;#}
-        {#             }#}
-        {#         }#}
-    </script>
-
-    {% load staticfiles %}
-    <script src="static/scripts/main.js"></script>
+{% load staticfiles %}
+<script src="static/scripts/main.js"></script>
 
 
 

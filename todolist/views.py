@@ -36,9 +36,32 @@ class TaskView(View):
     def post(request):
         if request.method == 'POST':
 
-            # create and save new task
             job_title = request.POST.get('job_title')
 
+            # check if the task title empty
+            if job_title == "":
+                err = {}
+                err['err'] = 'Error. Task title cannot be empty'
+                return HttpResponse(
+                    json.dumps(err),
+                    content_type="application/json"
+            )
+
+            tasks = TodoList.objects.all()
+
+
+            # check if task is in db
+            for task in tasks:
+                if task.title == job_title:
+                    err = {}
+                    err['err'] = 'Error. Cannot be task with same title'
+                    return HttpResponse(
+                        json.dumps(err),
+                        content_type="application/json"
+                    )
+
+
+            # create and save new task
             job = TodoList(title=job_title)
             job.save()
 

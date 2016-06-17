@@ -6,7 +6,7 @@ from django.contrib import admin
 class TodoList(models.Model):
 
     #title the job
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
 
     #is the job finished?
     is_finished = models.BooleanField(default=False)

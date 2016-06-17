@@ -54,29 +54,29 @@ $(function() {
     });
 
     //show form for edit
-     $(document).on('click', '.edit', function(e){
-         e.preventDefault();
-         var el = $(this);
+    $(document).on('click', '.edit', function(e){
+        e.preventDefault();
+        var el = $(this);
 
-         var id =el.attr("id");
-         var key = id.split('-')[2];
-         console.log(key);
-         console.log("Edit form submitted!");
-         $("#job-title-"+ key).hide();
-         $('.this_block_is_hidden').hide();
-         $("#title-input-"+ key).show();
+        var id =el.attr("id");
+        var key = id.split('-')[2];
+        console.log(key);
+        console.log("Edit form submitted!");
+        $("#job-title-"+ key).hide();
+        $('.this_block_is_hidden').hide();
+        $("#title-input-"+ key).show();
     });
 
     //edit job
-     $(document).on('submit', '.edit-title-form', function(e){
-         e.preventDefault();
-         var el = $(this);
+    $(document).on('submit', '.edit-title-form', function(e){
+        e.preventDefault();
+        var el = $(this);
 
-         var id =el.attr("id");
-         var key = id.split('-')[2];
-         console.log(key);
-         console.log("edit form submitted!");  // sanity check
-         edit_job(key);
+        var id =el.attr("id");
+        var key = id.split('-')[2];
+        console.log(key);
+        console.log("edit form submitted!");  // sanity check
+        edit_job(key);
     });
 
     // AJAX for adding job
@@ -88,13 +88,21 @@ $(function() {
             data : { job_title : $('#job_title').val() }, // data sent with the post request
             // handle a successful response
             success : function(json) {
-                $('#job_title').val(''); // remove the value from the input
-                console.log(json); // log the returned json to the console
-                $("#jobs").prepend('<li class = "active" id = "job-'+json.pk+'" status-job="s-active"><div onclick="openBlock(this);" id = "job-title-'+json.pk+'"><strong >'+json.title+'</strong></div><form method="POST" id="job-edit-'+json.pk+'" class="edit-title-form"><div><input type="text" value="'+json.title+'" class="editbox" id="title-input-'+json.pk+'"></div></form><div class="this_block_is_hidden"><input type="button"  id="delete-job-'+json.pk+'" class="delete" value="Delete"> | <input type="button" id="edit-job-'+json.pk+'" class="edit" value="Edit "> | <input type="button" id="done-job-'+json.pk+'" class="finished" value="Complete"></div><hr></li>');
-                $("#item_left").hide();
-                $("#active_jobs").prepend(" <p id = 'item_left'>Items left : " + json.active+"</p>");
+                if (json.err){
+                    console.log("Error");
+                    console.log(json.err);
+                    alert(json.err)
+                }
+                else {
 
-                console.log("success"); // another sanity check
+                    $('#job_title').val(''); // remove the value from the input
+                    console.log(json); // log the returned json to the console
+                    $("#jobs").prepend('<li class = "active" id = "job-' + json.pk + '" status-job="s-active"><div onclick="openBlock(this);" id = "job-title-' + json.pk + '"><strong >' + json.title + '</strong></div><form method="POST" id="job-edit-' + json.pk + '" class="edit-title-form"><div><input type="text" value="' + json.title + '" class="editbox" id="title-input-' + json.pk + '"></div></form><div class="this_block_is_hidden">&nbsp;&nbsp;<input type="button"  id="delete-job-' + json.pk + '" class="delete" value="Delete">&nbsp;&nbsp;<input type="button" id="edit-job-' + json.pk + '" class="edit" value="Edit ">&nbsp;&nbsp;<input type="button" id="done-job-' + json.pk + '" class="finished" value="Complete"></div><hr></li>');
+                    $("#item_left").hide();
+                    $("#active_jobs").prepend(" <p id = 'item_left'>Items left : " + json.active + "</p>");
+
+                    console.log("success"); // another sanity check
+                }
             },
             // handle a non-successful response
             error : function(xhr,errmsg,err) {
@@ -122,7 +130,7 @@ $(function() {
                     $("#all_completed").hide();
                 else{
                     $("#all_completed").hide();
-                    $("#job-delete-complete").prepend(" <a  id='all_completed' class='delete-completed' >Delete completed : " +  json.done+"</a>");
+                    $("#job-delete-complete").prepend(" <input type='button'  id='all_completed' class='delete-completed' value='Delete completed : " +  json.done+"'>");
                 }
                 console.log("post deletion successful");
             },
@@ -294,4 +302,29 @@ $(function() {
         }
     });
 
+    $(document).on('change','select',function(){
+        $('section li').show();
+        $('select').each(function(){
+            var val=this.value;
+            if (val!='') {
+                val=this.id.valueOf()[0]+'-'+val;
+                $('section li:not([status-job="'+val+'"])').hide();
+            };
+        });
+    });
+
 });
+
+function openBlock(el) {
+    var kids = el.parentNode.childNodes;
+    for (var k = 0; k < kids.length; k++) {
+        var child = kids[k];
+        if (child && child.className == "this_block_is_hidden") {
+            if (child.style.display != 'block') {
+                child.style.display = 'block';
+            } else {
+                child.style.display = 'none';
+            }
+        }
+    }
+}

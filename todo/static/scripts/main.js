@@ -306,7 +306,7 @@ $(function() {
     $(document).on('change','select',function(){
 
         $('section li').show();
-        $('select').each(function(){;
+        $('select').each(function(){
             var val=this.value;
             if (val!='') {
                 val=this.id.valueOf()[0]+'-'+val;

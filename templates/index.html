@@ -32,11 +32,11 @@
     <!-- The feed -->
     <div class="row white">
         <div class="columns large-12">
-            <div id="jobs">
+            <div>
                 <section>
                     {% for job in jobs %}
                         {% csrf_token %}
-                        <ul>
+                        <ul  id="jobs">
 
                             {% if job.is_finished  %}
                                 <li class = "done" id = "job-{{ job.id }}" status-job="s-done">
